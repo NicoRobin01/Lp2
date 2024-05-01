@@ -1,1 +1,62 @@
+import java.util.*;
 
+public class BFS {
+    static class Graph {
+        private int V; // Number of vertices
+        private int[][] adjMatrix; // Adjacency Matrix
+
+        // Constructor
+        Graph(int[][] matrix) {
+            V = matrix.length;
+            adjMatrix = matrix;
+        }
+
+        // Prints BFS traversal from a given source s
+        void BFS(int s) {
+            // Mark all the vertices as not visited(By default set as false)
+            boolean visited[] = new boolean[V];
+
+            // Create a queue for BFS
+            LinkedList<Integer> queue = new LinkedList<Integer>();
+
+            // Mark the current node as visited and enqueue it
+            visited[s] = true;
+            queue.add(s);
+
+            while (!queue.isEmpty()) {
+                // Dequeue a vertex from queue and print it
+                s = queue.poll();
+                System.out.print(s + " ");
+
+                // Get all adjacent vertices of the dequeued vertex s. If an adjacent has not been visited, then mark it
+                // visited and enqueue it
+                for (int i = 0; i < V; ++i) {
+                    if (adjMatrix[s][i] == 1 && !visited[i]) {
+                        visited[i] = true;
+                        queue.add(i);
+                    }
+                }
+            }
+        }
+    }
+
+    // Main method
+    public static void main(String args[]) {
+        int[][] matrix = {
+                {0, 1, 1, 1},
+                {1, 0, 0, 1},
+                {1, 0, 0, 1},
+                {1, 1, 1, 0}
+        };
+
+        Graph g = new Graph(matrix);
+
+        System.out.println("Breadth First Traversal of the graph starting from vertex 2:");
+
+        g.BFS(0);
+    }
+}
+
+o/p:
+Breadth First Traversal of the graph starting from vertex 2:
+0 1 2 3 
