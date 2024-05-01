@@ -1,0 +1,50 @@
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class CollegeEnquiryChatbot {
+    private static final Map<String, String> knowledgeBase = new HashMap<>();
+
+    public static void main(String[] args) {
+        initializeKnowledgeBase();
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to College Buddy Chatbot!");
+        System.out.println("Ask me any college-related question, or type 'exit' to quit.");
+
+        while (true) {
+            System.out.print("User: ");
+            String userInput = scanner.nextLine().toLowerCase();
+
+            if (userInput.equals("exit")) {
+                System.out.println("Goodbye! Have a great day.");
+                break;
+            }
+
+            String response = respond(userInput);
+            System.out.println("College Buddy: " + response);
+        }
+    }
+
+    private static void initializeKnowledgeBase() {
+        // Populate the knowledge base with sample questions and answers
+        knowledgeBase.put("what is your name?", "My name is College Buddy! Happy to assist.");
+        knowledgeBase.put("hello", "Hello! How can I help you with college-related queries?");
+        knowledgeBase.put("best colleges in pune", "COEP, PICT, VIT, Cummins College, and PCCOE");
+        knowledgeBase.put("engineering branches", "Computer Engineering, IT Engineering, and ENTC Engineering");
+        knowledgeBase.put("coep branch cut-offs", "Computer Engineering: 99.8 percentile, IT Engineering: Not available, ENTC Engineering: 99.2 percentile");
+        knowledgeBase.put("admissions start", "Admissions generally start around August.");
+        // Add more questions and answers as needed
+    }
+
+    private static String respond(String input) {
+        if (knowledgeBase.containsKey(input)) {
+            return knowledgeBase.get(input);
+        } else {
+            return "I'm sorry, but I don't have information on that topic. Is there something else I can assist you with?";
+        }
+    }
+}
+
+
+
