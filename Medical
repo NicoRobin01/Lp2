@@ -1,0 +1,67 @@
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
+
+public class MedicalDiagnosisExpert {
+    private static final Map<String, List<String>> knowledgeBase = new HashMap<>();
+
+    public static void main(String[] args) {
+        initializeKnowledgeBase();
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Welcome to the Medical Diagnosis Expert System!");
+        System.out.println("Enter your symptoms (comma-separated):");
+
+        while (true) {
+            System.out.print("User: ");
+            String userInput = scanner.nextLine().toLowerCase();
+
+            if (userInput.equals("exit")) {
+                System.out.println("Goodbye! Take care.");
+                break;
+            }
+
+            String[] symptoms = userInput.split(",");
+            String response = diagnose(symptoms);
+            System.out.println("Expert System: " + response);
+        }
+    }
+
+    private static void initializeKnowledgeBase() {
+        // Populate the knowledge base with sample symptoms and associated diseases
+        knowledgeBase.put("rash,body ache,fever", List.of(
+                "You may have chicken pox.",
+                "Please take the following medicines and precautions:",
+                "- Varicella vaccine",
+                "- Immunoglobulin",
+                "- Acetaminophen",
+                "- Acyclovir",
+                "- Stay at home and have oatmeal."
+        ));
+        knowledgeBase.put("headache,runny nose,sneezing,sore throat", List.of(
+                "You might have a common cold.",
+                "Consider the following remedies:",
+                "- Rest and stay hydrated",
+                "- Use nasal spray or saline drops",
+                "- Gargle with warm saltwater",
+                "- Take over-the-counter pain relievers"
+        ));
+        // Add more symptoms and recommendations as needed
+    }
+
+    private static String diagnose(String[] symptoms) {
+        // Check if the symptoms match any known disease
+        // Implement your logic here based on symptom combinations
+        // Return the diagnosis and relevant information (medicines, precautions, etc.)
+        // If no match, provide a default response
+
+        // Example:
+        String key = String.join(",", symptoms);
+        if (knowledgeBase.containsKey(key)) {
+            return String.join("\n", knowledgeBase.get(key));
+        } else {
+            return "I'm sorry, but I don't have information on that topic. Is there something else I can assist you with?";
+        }
+    }
+}
